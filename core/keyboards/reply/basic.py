@@ -1,7 +1,7 @@
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
 
-def get_reply_keyboard():
+def get_reply_start_keyboard():
     keyboard_builder = ReplyKeyboardBuilder()
     keyboard_builder.button(text='Условия рассрочки')
     keyboard_builder.button(text='Акции и скидки')
@@ -28,5 +28,6 @@ def get_reply_admin_edit_keyboard():
     keyboard_builder.button(text='Удалить товар')
     keyboard_builder.button(text='Изменить товар')
     keyboard_builder.button(text='Сделать рассылку')
+    keyboard_builder.button(text='Главное меню')
     keyboard_builder.adjust(2, 2)
     return keyboard_builder.as_markup(resize_keyboard=True, one_time_keyboard=True)

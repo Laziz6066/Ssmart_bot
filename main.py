@@ -6,12 +6,18 @@ from core.handlers.basic import command_start_handler
 from core.settings import settings
 from loader import dp
 from core.utils.commands import set_commands
-from core.handlers.products_callback import fridge_list, back_category, phone_list, conditioner_list, tv_list
+from core.handlers.callback.products_category import fridge_list, back_category, phone_list, conditioner_list, tv_list
+from core.handlers.callback.products_brands import fridge_category
 from aiogram import F
+from core.database.products import db_start
+from core.handlers.products_add import (get_product_form, get_product_name, get_product_photo,
+                                        get_product_price, get_product_description)
+from core.handlers.products_view import show_products
 
 
 async def start_bot(bot: Bot):
     await set_commands(bot)
+    await db_start()
     await bot.send_message(settings.bots.admin_id, text='Бот запущен')
 
 
@@ -21,12 +27,23 @@ async def stop_bot(bot: Bot):
 
 dp.startup.register(start_bot)
 dp.shutdown.register(stop_bot)
-dp.message.register(command_start_handler)
+dp.message.register(command_start_handler, F.text == 'start')
+
+# dp.message.register(show_products, F.text == 'load')
+
 dp.callback_query.register(fridge_list, F.text == 'fridge')
 dp.callback_query.register(back_category, F.text == 'back_category')
 dp.callback_query.register(phone_list, F.text == 'phone')
 dp.callback_query.register(conditioner_list, F.text == 'conditioner')
 dp.callback_query.register(tv_list, F.text == 'tv')
+
+dp.callback_query.register(fridge_category, F.text == 'fridge_tcl')
+
+dp.message.register(get_product_form, F.text == 'Добавить товар')
+dp.message.register(get_product_name)
+dp.message.register(get_product_description)
+dp.message.register(get_product_photo)
+dp.message.register(get_product_price)
 
 
 async def main() -> None:

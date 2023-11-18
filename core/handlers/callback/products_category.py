@@ -2,8 +2,8 @@ from aiogram import Bot
 from aiogram.types import CallbackQuery
 from aiogram import F
 from loader import dp
-from core.keyboards.inline import (fridge_inline_keyboard, category_inline_keyboard, phone_inline_keyboard,
-                                   conditioner_inline_keyboard, tv_inline_keyboard)
+from core.keyboards.inline.inline import (fridge_inline_keyboard, category_inline_keyboard, phone_inline_keyboard,
+                                          conditioner_inline_keyboard, tv_inline_keyboard)
 
 
 @dp.callback_query(F.data == 'phone')
