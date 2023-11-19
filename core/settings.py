@@ -10,7 +10,7 @@ class Bots:
 
 @dataclass
 class Settings:
-    bots:Bots
+    bots: Bots
 
 
 def get_settings(path: str):
