@@ -16,6 +16,8 @@ from core.handlers.products_add import (get_product_form, get_product_name, get_
 from core.handlers.basic import start_next_step_ru, start_next_step_uz
 from core.handlers.callback.order_product import order_name
 from core.database.order import db_start_order
+from core.handlers.mailing import get_mailing_form
+from core.database.mailing import db_start_mailing
 
 
 async def start_bot(bot: Bot):
@@ -23,6 +25,7 @@ async def start_bot(bot: Bot):
     await db_start()
     await db_start_language()
     await db_start_order()
+    await db_start_mailing()
     await bot.send_message(settings.bots.admin_id, text='Бот запущен')
 
 
@@ -48,6 +51,7 @@ dp.callback_query.register(order_name, F.data.startswith('order_'))
 dp.callback_query.register(fridge_category, F.text == 'fridge_tcl')
 
 dp.message.register(get_product_form, F.text == 'Добавить товар')
+dp.message.register(get_mailing_form, F.text == 'Сделать рассылку')
 dp.message.register(get_product_name)
 dp.message.register(get_product_description)
 dp.message.register(get_product_photo)

@@ -1,5 +1,4 @@
-from aiogram.filters import CommandStart, Command
-from aiogram.utils.markdown import hbold
+from aiogram.filters import CommandStart
 from aiogram.types import Message, FSInputFile
 from loader import dp
 from aiogram import F
@@ -9,7 +8,7 @@ from core.keyboards.inline.inline import category_inline_keyboard_ru, category_i
 from core.settings import settings
 from aiogram import Bot
 from core.bot_text import text
-from core.database.language import create_language, get_language, db_start_language
+from core.database.language import create_language, get_language, db_start_language, get_user_id
 from core.database.order import get_orders, db_start_order
 
 
@@ -98,7 +97,7 @@ async def view_orders(message: Message):
     db, cur = await db_start_order()
     orders = await get_orders(cur)
     if orders:
-        for product in orders:
-            user_id, name, phone, product_name, product_price = product
+        for order in orders:
+            user_id, name, phone, product_name, product_price = order
             await message.answer(f'Имя: {name}\r\nНомер телефона: {phone}\r\nНазвание продукта: {product_name}\r\n'
                                  f'Цена продукта: {product_price}')

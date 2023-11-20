@@ -31,3 +31,9 @@ async def get_language(user_id):
     lang = cur.fetchone()
     cur.close()
     return lang[0] if lang else None
+
+
+async def get_user_id(cur):
+    cur.execute("SELECT * FROM language")
+    mailings = cur.fetchall()
+    return mailings

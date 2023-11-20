@@ -13,3 +13,8 @@ class StepsForm(StatesGroup):
 class OrderForm(StatesGroup):
     GET_NAME = State()
     GET_PHONE = State()
+
+
+class MailingForm(StatesGroup):
+    GET_DESCRIPTION = State()
+    GET_PHOTO = State()
